@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8" />
+  <title>Търсене на човек по ID</title>
+</head>
+<body>
+  <h1>Въведи ID на човек:</h1>
+  <input type="number" id="personIdInput" />
+  <button onclick="searchPerson()">Търси</button>
+
+  <div id="result" style="margin-top: 20px; font-weight: bold;"></div>
+
+  <script>
+    
+    const people = [
+      { id: 1, name: "Иван Иванов", age: 25, city: "София" },
+      { id: 2, name: "Петър Петров", age: 30, city: "Пловдив" },
+      { id: 3, name: "Георги Георгиев", age: 40, city: "Варна" },
+      { id: 4, name: "Мария Маринова", age: 22, city: "Бургас" }
+    ];
+
+    function searchPerson() {
+      const input = document.getElementById("personIdInput").value.trim();
+      const id = Number(input);
+
+      const resultDiv = document.getElementById("result");
+      if (!input || isNaN(id)) {
+        resultDiv.textContent = "Моля, въведете валидно ID.";
+        return;
+      }
+
+      
+      const person = people.find(p => p.id === id);
+
+      if (person) {
+        // Ако има намерен човек - показваме информация
+        resultDiv.innerHTML = `
+          ID: ${person.id}<br/>
+          Име: ${person.name}<br/>
+          Възраст: ${person.age}<br/>
+          Град: ${person.city}
+        `;
+      } else {
+      
+        resultDiv.textContent = "Няма човек с това ID.";
+      }
+    }
+  </script>
+</body>
+</html>
